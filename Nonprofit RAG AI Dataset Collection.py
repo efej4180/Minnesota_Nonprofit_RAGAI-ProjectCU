@@ -236,6 +236,7 @@ def chunk_subpages(csv_file):
 
                 urls = (nonprofit["Subpages"]).split("\n")
                 suburl_index = 0
+                chunk_index = 0
                 for url in urls:
                     try:
                         #attempt to make a request ot the website
@@ -257,7 +258,6 @@ def chunk_subpages(csv_file):
                     text = soup.get_text(separator="\n", strip=True)
 
                     chunks = text_splitter.create_documents([text])
-                    chunk_index = 0
                     for chunk in chunks:
                         chunk_row = nonprofit.copy()
                         chunk_row["id"] = f"{nonprofit['ein']}_{suburl_index}_{chunk_index}"
